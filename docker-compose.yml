@@ -1,0 +1,14 @@
+version: '20.10.21'
+services:
+  postgres:
+    image: postgres:9.6
+    ports:
+      - 5432:5432
+    restart: always
+  app:
+    image: app
+    depends_on:
+      - postgres
+    ports:
+      - 8080:8080
+    restart: always
