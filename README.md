@@ -60,20 +60,3 @@ spring.servlet.multipart.max-file-size=2MB
 spring.servlet.multipart.max-request-size=2MB
 
 
-
-docker-compose.yml :
-
-version: '20.10.21'
-services:
-  postgres:
-    image: postgres:9.6
-    ports:
-      - 5432:5432
-    restart: always
-  app:
-    image: app
-    depends_on:
-      - postgres
-    ports:
-      - 8080:8080
-    restart: always
