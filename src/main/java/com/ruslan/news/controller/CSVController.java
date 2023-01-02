@@ -38,8 +38,9 @@ import static java.sql.DriverManager.getConnection;
 @CrossOrigin("http://localhost:8080")
 @Controller
 @RequestMapping("/api/csv")
-public class CSVController   {
+public class CSVController {
 
+    ExecutorService executorService = Executors.newFixedThreadPool(2);
 
     //пагинация
     @RestController
@@ -49,7 +50,7 @@ public class CSVController   {
 
         private final NewsRepository repository;
 
-            //для Security. реализую метод чтобы он имел доступ к джава потоку
+        //для Security. реализую метод чтобы он имел доступ к джава потоку
         @GetMapping("/showUserInfo")
         public String showUserInfo() {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -114,11 +115,11 @@ public class CSVController   {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-
+    //вот downloadFileSource думал как-то обернуть в методы чтобы вызывать в потоках через ExecutorService
+    //например, но что-то как-то не доделал. Тут мне нужна помощь, хотя понимаю и знаю как создавать потоки, но.. не смог =(
+    //need help =) 
     @GetMapping("/download/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFileSource(@PathVariable String fileName)  {
+    public ResponseEntity<Resource> downloadFileSource(@PathVariable String fileName) {
 
 
         InputStreamResource file = new InputStreamResource(fileService.load());
@@ -145,11 +146,27 @@ public class CSVController   {
         } catch (
                 Exception e) {
             System.out.println(e);
-            return null;
+           return null;
         }
 
     }
-/*
+
+        //этот метод исключительно для проверки поиска по источнику и тематике
+    @GetMapping
+    public String testIndex(Model model) {
+        model.addAttribute("news", fileService.getAllNews().get(0));
+
+        fileService.findBySource("irbis.plus");
+        fileService.findByTopic("Помощь юр. лицам");
+
+        fileService.test();
+
+        return "news/testIndex";
+    }
+}
+
+/*   Это я хотел сделать как второй метод для выгрузки другого источника по threads. Оставлю пока тут.
+
     @GetMapping("/download/{fileName:.+}")
     public ResponseEntity<Resource> downloadFileSourceTwo(@PathVariable String fileName)  {
 
@@ -182,22 +199,6 @@ public class CSVController   {
         }
 
     }*/
-
-        //этот метод исключительно для проверки поиска по источнику и тематике
-    @GetMapping
-    public String testIndex(Model model) {
-        model.addAttribute("news", fileService.getAllNews().get(0));
-
-        fileService.findBySource("irbis.plus");
-        fileService.findByTopic("Помощь юр. лицам");
-
-        fileService.test();
-
-        return "news/testIndex";
-    }
-}
-
-
 
 
 
