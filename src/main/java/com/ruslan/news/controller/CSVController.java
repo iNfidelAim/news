@@ -40,7 +40,10 @@ import static java.sql.DriverManager.getConnection;
 @RequestMapping("/api/csv")
 public class CSVController {
 //ну собственно вот она многопоточность в виде пула ))  shutdown вызывать не нужно
-   // ExecutorService executorService = Executors.newFixedThreadPool(2);
+    //Еще я подумал, что можно вообще сделать отдельный класс(например ThreadDownloadUpload) в котором будет ThreadPool
+    //и класс ThreadDownloadUpload будет поточить этот класс CSVController, но возможно новые камни, а времени на
+    //реализацию и проверку этой теории нет.
+    ExecutorService executorService = Executors.newFixedThreadPool(2);
 
     //пагинация
     @RestController
