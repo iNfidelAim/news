@@ -39,8 +39,8 @@ import static java.sql.DriverManager.getConnection;
 @Controller
 @RequestMapping("/api/csv")
 public class CSVController {
-
-    ExecutorService executorService = Executors.newFixedThreadPool(2);
+//ну собственно вот она многопоточность в виде пула ))  shutdown вызывать не нужно
+   // ExecutorService executorService = Executors.newFixedThreadPool(2);
 
     //пагинация
     @RestController
@@ -115,10 +115,8 @@ public class CSVController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    //вот downloadFileSource думал как-то обернуть в методы чтобы вызывать в потоках через ExecutorService
-    //например, но что-то как-то не доделал. Тут мне нужна помощь, хотя понимаю и знаю как создавать потоки, но.. не смог =(
-    //need help =) 
-    @GetMapping("/download/{fileName:.+}")
+
+    @GetMapping("/download/{fileName:.irbisPlus}")
     public ResponseEntity<Resource> downloadFileSource(@PathVariable String fileName) {
 
 
@@ -151,23 +149,8 @@ public class CSVController {
 
     }
 
-        //этот метод исключительно для проверки поиска по источнику и тематике
-    @GetMapping
-    public String testIndex(Model model) {
-        model.addAttribute("news", fileService.getAllNews().get(0));
 
-        fileService.findBySource("irbis.plus");
-        fileService.findByTopic("Помощь юр. лицам");
-
-        fileService.test();
-
-        return "news/testIndex";
-    }
-}
-
-/*   Это я хотел сделать как второй метод для выгрузки другого источника по threads. Оставлю пока тут.
-
-    @GetMapping("/download/{fileName:.+}")
+    @GetMapping("/download/{fileName:.praktikaIrbis}")
     public ResponseEntity<Resource> downloadFileSourceTwo(@PathVariable String fileName)  {
 
         InputStreamResource file = new InputStreamResource(fileService.load());
@@ -175,7 +158,7 @@ public class CSVController {
         try {
             //да тут дубликейт, по хорошему можно в методы сделать, но решил оставить так
             Connection con = getConnection("jdbc:postgresql://localhost:5432/news");
-            PreparedStatement statement = con.prepareStatement("SELECT topic, COUNT(topic) FROM News WHERE source = 'irbis.plus' group by topic");
+            PreparedStatement statement = con.prepareStatement("SELECT topic, COUNT(topic) FROM News WHERE source = 'praktika.irbis.plus' group by topic");
 
 
             ResultSet result = statement.executeQuery();
@@ -198,12 +181,21 @@ public class CSVController {
             return null;
         }
 
-    }*/
+    }
 
+        //этот метод исключительно для проверки поиска по источнику и тематике
+    @GetMapping
+    public String testIndex(Model model) {
+        model.addAttribute("news", fileService.getAllNews().get(0));
 
+        fileService.findBySource("irbis.plus");
+        fileService.findByTopic("Помощь юр. лицам");
 
+        fileService.test();
 
-
+        return "news/testIndex";
+    }
+}
 
 
 

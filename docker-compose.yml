@@ -1,23 +1,11 @@
 version: '3.5'
 services:
-  news-app:
-    build: src/main/java/com/ruslan/news
-    command: ./news-app
+  db_auth:
+    container_name: news_db
     ports:
-      - 8000:8000
-    depends_on:
-      - db
+      - "5432:5432"
     environment:
-      - DB_PASSWORD=postgres
-  db:
-  restart: always
-  image: postgres:latest
-  volumes:
-      - ./.database/postgres/data:/var/lib/postgresql/data
-  environment:
-      - POSTGRES_DB=news
-      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-  ports:
-      - 5436:5432
+      - POSTGRES_USER=admin
 
+    image: postgres:14.3-alpine

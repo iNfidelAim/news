@@ -30,7 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login", "/error").permitAll()
                 .anyRequest().hasAnyRole("USER")
                 .and()
-                .formLogin().loginPage("/login")
+                .formLogin()
+                .loginPage("/login")
                 .loginProcessingUrl("/process_login")
                 .defaultSuccessUrl("/hello", true)  //после успешной аутентификации сюда будет редирект вместо хелло надо что-то другое
                 .failureUrl("/login?error");
