@@ -22,7 +22,7 @@ public class CSVHelper extends Thread {
     public static String TYPE = "text/csv";
     static String[] HEADERs = { "Id", "Source", "Topic", "Title" };
 
-    ExecutorService executorService = Executors.newFixedThreadPool(2);
+
 
     @Override
     public void run() {

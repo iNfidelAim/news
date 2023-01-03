@@ -39,11 +39,7 @@ import static java.sql.DriverManager.getConnection;
 @Controller
 @RequestMapping("/api/csv")
 public class CSVController {
-//ну собственно вот она многопоточность в виде пула ))  shutdown вызывать не нужно
-    //Еще я подумал, что можно вообще сделать отдельный класс(например ThreadDownloadUpload) в котором будет ThreadPool
-    //и класс ThreadDownloadUpload будет поточить этот класс CSVController, но возможно новые камни, а времени на
-    //реализацию и проверку этой теории нет.
-    ExecutorService executorService = Executors.newFixedThreadPool(2);
+
 
     //пагинация
     @RestController
@@ -119,7 +115,22 @@ public class CSVController {
         }
     }
 
-    @GetMapping("/download/{fileName:.irbisPlus}")
+    //этот метод исключительно для проверки поиска по источнику и тематике
+    @GetMapping
+    public String testIndex(Model model) {
+        model.addAttribute("news", fileService.getAllNews().get(0));
+
+        fileService.findBySource("irbis.plus");
+        fileService.findByTopic("Помощь юр. лицам");
+
+        fileService.test();
+
+        return "news/testIndex";
+    }
+}
+
+
+/*    @GetMapping("/download/{fileName:.irbisPlus}")
     public ResponseEntity<Resource> downloadFileSource(@PathVariable String fileName) {
 
 
@@ -137,8 +148,6 @@ public class CSVController {
             while (result.next()) {
                 array.addAll((Collection<? extends String>) statement);
             }
-            PreparedStatement fileName2 = getConnection("jdbc:postgresql://localhost:5432/news")
-                    .prepareStatement("SELECT DISTINCT source FROM News WHERE source = irbis.plus");
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName)
                     .contentType(MediaType.parseMediaType("application/csv"))
@@ -171,8 +180,6 @@ public class CSVController {
             while (result.next()) {
                 array.addAll((Collection<? extends String>) statement);
             }
-            PreparedStatement fileName2 = getConnection("jdbc:postgresql://localhost:5432/news")
-                    .prepareStatement("SELECT DISTINCT source FROM News WHERE source = 'praktika.irbis.plus'");
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName2)
                     .contentType(MediaType.parseMediaType("application/csv"))
@@ -184,21 +191,8 @@ public class CSVController {
             return null;
         }
 
-    }
+    }*/
 
-        //этот метод исключительно для проверки поиска по источнику и тематике
-    @GetMapping
-    public String testIndex(Model model) {
-        model.addAttribute("news", fileService.getAllNews().get(0));
-
-        fileService.findBySource("irbis.plus");
-        fileService.findByTopic("Помощь юр. лицам");
-
-        fileService.test();
-
-        return "news/testIndex";
-    }
-}
 
 
 
