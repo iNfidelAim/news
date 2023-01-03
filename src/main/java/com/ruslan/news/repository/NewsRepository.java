@@ -11,8 +11,10 @@ import java.util.List;
 public interface NewsRepository extends JpaRepository<News, Long> {
 
     List<News> findAll();
+
     //поиск по источнику
     List<News> findBySource(String source);
+
     //поиск по тематике
     List<News> findByTopic(String topic);
 }

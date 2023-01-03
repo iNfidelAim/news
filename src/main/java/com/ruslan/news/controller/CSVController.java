@@ -1,12 +1,8 @@
 package com.ruslan.news.controller;
 
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
 
 import com.ruslan.news.dto.CSVHelper;
 import com.ruslan.news.dto.ResponseMessage;
@@ -16,13 +12,9 @@ import com.ruslan.news.security.PersonDetails;
 import com.ruslan.news.service.CSVService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import static java.sql.DriverManager.getConnection;
 
 
 @CrossOrigin("http://localhost:8080")
@@ -128,70 +119,6 @@ public class CSVController {
         return "news/testIndex";
     }
 }
-
-
-/*    @GetMapping("/download/{fileName:.irbisPlus}")
-    public ResponseEntity<Resource> downloadFileSource(@PathVariable String fileName) {
-
-
-        InputStreamResource file = new InputStreamResource(fileService.load());
-
-        try {
-            Connection con = getConnection("jdbc:postgresql://localhost:5432/news");
-            PreparedStatement statement = con.prepareStatement("SELECT topic, COUNT(topic) FROM News WHERE source = 'irbis.plus' group by topic");
-
-
-            ResultSet result = statement.executeQuery();
-
-            ArrayList<String> array = new ArrayList<>();
-
-            while (result.next()) {
-                array.addAll((Collection<? extends String>) statement);
-            }
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName)
-                    .contentType(MediaType.parseMediaType("application/csv"))
-                    .body(file);
-
-        } catch (
-                Exception e) {
-            System.out.println(e);
-           return null;
-        }
-
-    }
-
-
-    @GetMapping("/download/{fileName:.praktikaIrbis}")
-    public ResponseEntity<Resource> downloadFileSourceTwo(@PathVariable String fileName)  {
-
-        InputStreamResource file = new InputStreamResource(fileService.load());
-
-        try {
-            //да тут дубликейт, по хорошему можно в методы сделать, но решил оставить так
-            Connection con = getConnection("jdbc:postgresql://localhost:5432/news");
-            PreparedStatement statement = con.prepareStatement("SELECT topic, COUNT(topic) FROM News WHERE source = 'praktika.irbis.plus' group by topic");
-
-
-            ResultSet result = statement.executeQuery();
-
-            ArrayList<String> array = new ArrayList<>();
-
-            while (result.next()) {
-                array.addAll((Collection<? extends String>) statement);
-            }
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName2)
-                    .contentType(MediaType.parseMediaType("application/csv"))
-                    .body(file);
-
-            } catch (
-                Exception e) {
-            System.out.println(e);
-            return null;
-        }
-
-    }*/
 
 
 

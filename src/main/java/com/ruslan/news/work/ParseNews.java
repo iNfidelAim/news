@@ -18,7 +18,7 @@ public class ParseNews {
 
     CSVService csvService;
 
-    @Scheduled(cron = "00 2 * * * *") //вызываем каждую секунду, минуту и тд
+    @Scheduled(cron = "00 2 * * * *")
 
     public void parseNewNews() {
 //тут будет исключение, unknown protocol: localhost.  MalformedURLException, IllegalArgumentException

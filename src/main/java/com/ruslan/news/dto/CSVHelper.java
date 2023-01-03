@@ -5,9 +5,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
 
 import com.ruslan.news.model.News;
 import org.apache.commons.csv.CSVFormat;
@@ -64,7 +62,6 @@ public class CSVHelper extends Thread {
             throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
         }
     }
-    //тут два потока для записи в файлы csv по источникам
 
 
     public static ByteArrayInputStream newsToCSV(List<News> newsList) {
