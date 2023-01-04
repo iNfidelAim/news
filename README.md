@@ -35,7 +35,7 @@ WEB сервис
 
 localhost:8080/api/csv/download/{fileName:.+} GET загрузить все сохраненные данные из базы данных 
 localhost:8080/api/csv/upload POST для загрузки в бд
-localhost:8080/api/csv/tutorials GET JSON формат
+localhost:8080/api/csv/news GET JSON формат
 
 Postman не будет выполнять запросы пока юзер не залогинится.
 
