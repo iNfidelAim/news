@@ -37,6 +37,9 @@ localhost:8080/api/csv/download/{fileName:.+} GET загрузить все со
 localhost:8080/api/csv/upload POST для загрузки в бд
 localhost:8080/api/csv/news GET JSON формат
 
+login: test_user
+password: test_password
+
 Postman не будет выполнять запросы пока юзер не залогинится.
 
 
