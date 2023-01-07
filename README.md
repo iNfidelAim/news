@@ -55,7 +55,7 @@ spring.jpa.properties.hibernate.show_sql=true
 
 #Hibernate ddl auto (create, create-drop, validate, update)
 
-spring.jpa.hibernate.ddl-auto= update
+spring.jpa.hibernate.ddl-auto= validate
 
 #Configure the file size to be uploaded
 
