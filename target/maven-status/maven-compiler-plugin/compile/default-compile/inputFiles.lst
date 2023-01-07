@@ -1,0 +1,15 @@
+C:\JAVA\news\src\main\java\com\ruslan\news\dto\CSVHelper.java
+C:\JAVA\news\src\main\java\com\ruslan\news\work\ParseNews.java
+C:\JAVA\news\src\main\java\com\ruslan\news\service\PersonDetailsService.java
+C:\JAVA\news\src\main\java\com\ruslan\news\dto\ResponseMessage.java
+C:\JAVA\news\src\main\java\com\ruslan\news\config\SecurityConfig.java
+C:\JAVA\news\src\main\java\com\ruslan\news\controller\AuthController.java
+C:\JAVA\news\src\main\java\com\ruslan\news\repository\PeopleRepository.java
+C:\JAVA\news\src\main\java\com\ruslan\news\service\CSVService.java
+C:\JAVA\news\src\main\java\com\ruslan\news\security\PersonDetails.java
+C:\JAVA\news\src\main\java\com\ruslan\news\model\Person.java
+C:\JAVA\news\src\main\java\com\ruslan\news\NewsApplication.java
+C:\JAVA\news\src\main\java\com\ruslan\news\util\FileUploadExceptionAdvice.java
+C:\JAVA\news\src\main\java\com\ruslan\news\model\News.java
+C:\JAVA\news\src\main\java\com\ruslan\news\repository\NewsRepository.java
+C:\JAVA\news\src\main\java\com\ruslan\news\controller\CSVController.java

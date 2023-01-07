@@ -1,0 +1,16 @@
+com\ruslan\news\controller\CSVController$PostController.class
+com\ruslan\news\repository\NewsRepository.class
+com\ruslan\news\service\PersonDetailsService.class
+com\ruslan\news\service\CSVService.class
+com\ruslan\news\work\ParseNews.class
+com\ruslan\news\NewsApplication.class
+com\ruslan\news\dto\ResponseMessage.class
+com\ruslan\news\model\Person.class
+com\ruslan\news\config\SecurityConfig.class
+com\ruslan\news\dto\CSVHelper.class
+com\ruslan\news\controller\AuthController.class
+com\ruslan\news\model\News.class
+com\ruslan\news\repository\PeopleRepository.class
+com\ruslan\news\controller\CSVController.class
+com\ruslan\news\security\PersonDetails.class
+com\ruslan\news\util\FileUploadExceptionAdvice.class
