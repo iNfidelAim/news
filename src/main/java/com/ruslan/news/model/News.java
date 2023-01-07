@@ -9,6 +9,7 @@ public class News {
     //source - источник, topic - тематика, title - новость (ну вот так ничего лучше не придумал, а транслитом писать не стал =))
         @Id
         @Column(name = "id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private long id;
 
         @Column(name = "source")
